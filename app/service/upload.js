@@ -2,7 +2,7 @@
  * @ Author: 伟龙-willon
  * @ Create Time: 2019-08-06 10:09:30
  * @ Modified by: 伟龙-willon
- * @ Modified time: 2021-03-10 16:52:10
+ * @ Modified time: 2021-03-11 20:29:51
  * @ Description:
  */
 
@@ -76,7 +76,7 @@ class UploadService extends Service{
 }
 
 function getFileName(file_name){
-    return Date.now() + '_fromabtest_' + ( ~~( Math.random() * 1e6 ) ) + Array.prototype.slice.call(/(\..+)$/.exec(file_name) || '')[1];
+    return Date.now() + '_' + ( ~~( Math.random() * 1e6 ) ) + Array.prototype.slice.call(/(\..+)$/.exec(file_name) || '')[1];
 }
 
 module.exports = UploadService;

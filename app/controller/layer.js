@@ -1,10 +1,10 @@
 const RestfulController = require('./restful_controller/index.js');
 
-class AppController extends RestfulController {
+class LayerController extends RestfulController {
     constructor(ctx){
         /** context与指定服务名称 */    
-        super(ctx,{service:'app'});
-        this.service_name = 'app'
+        super(ctx,{service:'layer'});
+        this.service_name = 'layer'
     }
     /** @override */
     async index(){
@@ -14,4 +14,4 @@ class AppController extends RestfulController {
     }
 }
 
-module.exports = AppController
+module.exports = LayerController

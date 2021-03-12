@@ -9,9 +9,12 @@ const Auth = '/admin';
 module.exports = app => {
   const { router , controller } = app;
   router.resources('app',Auth + '/app',controller.app);
+  router.resources('layer',Auth + '/layer',controller.layer);
+  router.resources('experiment',Auth + '/experiment',controller.experiment);
   router.resources('user',Auth + '/user',controller.user);
   router.post('/upload',controller.upload.create)
   router.post('/login',controller.user.login)
   router.get(Auth + '/logout',controller.user.logout)
   router.get(Auth + '/user_session',controller.user.getSession)
+  router.post(Auth + '/launch',controller.launch.launch);
 };

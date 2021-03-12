@@ -2,7 +2,7 @@
  * @ Author: 伟龙-willon
  * @ Create Time: 2019-07-30 15:25:28
  * @ Modified by: 伟龙-willon
- * @ Modified time: 2021-03-10 21:15:17
+ * @ Modified time: 2021-03-11 18:35:23
  * @ Description:
  */
 const Service = require('egg').Service;
@@ -139,10 +139,10 @@ class BaseService extends Service {
             }
             const uuid = node_uuid.v4().replace(/-/g,'');
             result = await this.app.mysql.insert(this.table_name,{
-                id:uuid,
+                // id:uuid,
                 ...data
             });
-            result = {status:1,id:uuid,msg:'success'}
+            result = {status:1,id:result.insertId,msg:'success'}
         } catch (err) {
             //this.ctx.eclogger.error(err)
             result = {status:2,msg:err.message}
