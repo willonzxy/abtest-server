@@ -2,7 +2,7 @@
  * @ Author: 伟龙-willon
  * @ Create Time: 2019-07-30 10:39:21
  * @ Modified by: 伟龙-willon
- * @ Modified time: 2021-03-10 16:00:04
+ * @ Modified time: 2021-05-08 10:39:36
  * @ Description:
  */
 const path = require('path');
@@ -17,6 +17,14 @@ module.exports = {
         },
         app:true, 
         agent:true, // 实例挂载到agent进程上
+    },
+    redis:{
+        client:{
+            port:6379,
+            host:'localhost',
+            password:'',
+            db:0
+        }
     },
     security:{
         csrf: {

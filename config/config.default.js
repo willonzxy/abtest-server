@@ -13,7 +13,7 @@ module.exports = appInfo => {
   const config = exports = {};
 
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1615358289384_1479_abtest';
+  config.keys = '_1615358289384_1479_abtest';
 
   // add your middleware config here
   // config.middleware = ['carryRequestId','checkSqlInjectAttack','acl','autoUpdateDate'];

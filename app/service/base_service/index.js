@@ -2,7 +2,7 @@
  * @ Author: 伟龙-willon
  * @ Create Time: 2019-07-30 15:25:28
  * @ Modified by: 伟龙-willon
- * @ Modified time: 2021-03-11 18:35:23
+ * @ Modified time: 2021-05-13 16:56:42
  * @ Description:
  */
 const Service = require('egg').Service;
@@ -16,7 +16,7 @@ class BaseService extends Service {
     }
     async find(options){
         const { app } = this;
-        let { pageNum = 1 , pageSize = 10 , regExp = '', order_by='created_date', sort_way='DESC',time_sort_by = '', start_time = '', end_time = '', attrs , ...rest} = options;
+        let { pageNum = 1 , pageSize = 10 , regExp = '', order_by='id', sort_way='DESC',time_sort_by = '', start_time = '', end_time = '', attrs , ...rest} = options;
         let limit = +pageSize === 0 ? 1 : +pageSize,offset = ( pageNum - 1 ) * pageSize;
         let data = [];
         let time_query_str = '' , like_query_arr = [] , qstr = '' , base_sql = '',sql = '';
@@ -87,7 +87,7 @@ class BaseService extends Service {
             return {
                 list:data,
                 numTotal,
-                currentPage:pageNum,
+                currentPage:+pageNum,
                 count:data.length,
                 pageTotal: numTotal > 0 ? ~~( (numTotal - 1) / pageSize ) + 1 : 0
             }
@@ -97,7 +97,7 @@ class BaseService extends Service {
         return {
             list:[],
             numTotal:0,
-            currentPage:pageNum,
+            currentPage:+pageNum,
             count:0,
             pageTotal:0
         }
@@ -132,16 +132,14 @@ class BaseService extends Service {
         try {
             for(let key in data){
                 if(data[key]){
-                    ( Array.isArray(data[key]) && data[key].length === 0 ) && delete data[key]
+                    ( Array.isArray(data[key]) && data[key].length === 0 ) && delete data[key];
+                    // ( Array.isArray(data[key]) && data[key].length !== 0 ) && (data[key] === JSON.stringify(data[key]))
                 }else{
-                    !data[key] && delete data[key]
+                    (data[key] === null || data[key] === undefined) && delete data[key]
                 }
             }
-            const uuid = node_uuid.v4().replace(/-/g,'');
-            result = await this.app.mysql.insert(this.table_name,{
-                // id:uuid,
-                ...data
-            });
+            // const uuid = node_uuid.v4().replace(/-/g,'');
+            result = await this.app.mysql.insert(this.table_name,data);
             result = {status:1,id:result.insertId,msg:'success'}
         } catch (err) {
             //this.ctx.eclogger.error(err)
