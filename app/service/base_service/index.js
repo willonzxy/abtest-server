@@ -2,7 +2,7 @@
  * @ Author: 伟龙-willon
  * @ Create Time: 2019-07-30 15:25:28
  * @ Modified by: 伟龙-willon
- * @ Modified time: 2021-05-13 16:56:42
+ * @ Modified time: 2021-05-17 14:04:06
  * @ Description:
  */
 const Service = require('egg').Service;
@@ -139,6 +139,7 @@ class BaseService extends Service {
                 }
             }
             // const uuid = node_uuid.v4().replace(/-/g,'');
+            // console.log(data)
             result = await this.app.mysql.insert(this.table_name,data);
             result = {status:1,id:result.insertId,msg:'success'}
         } catch (err) {
